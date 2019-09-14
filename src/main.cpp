@@ -1,6 +1,5 @@
 #include "SparkFunCCS811.h"
 #include <Arduino.h>
-#include "main.h"
 #include <WiFi.h>
 #include <HTTPClient.h>
 #include <ArduinoJson.h>
@@ -12,14 +11,16 @@
 #define CCS811_ADDR 0x5B //Default I2C Address
 //#define CCS811_ADDR 0x5A //Alternate I2C Address
 
-const char *networkName = "test";
-const char *networkPswd = "testtesttesttestTest123!_*testtest123";
+const char *networkName = "Nest";
+const char *networkPswd = "25020792518144796007";
 const char *authUser = "airquality";
-const char *authPwd = "4378jghfj$h#zutfgh3x(ghj)555-_ccc"
-String API_LINK = "https://www.iwi.hs-karlsruhe.de/Intranetaccess/buildings/facultyrooms/airquality/data/" HTTPClient http;
+const char *authPwd = "4378jghfj$h#zutfgh3x(ghj)555-_ccc";
+String API_LINK = "https://www.iwi.hs-karlsruhe.de/Intranetaccess/buildings/facultyrooms/airquality/data/"; 
+HTTPClient http;
 const int sleepTimeInSeconds = 15;
-String macAdress = "";
-String apiAdress = "https://www.iwi.hs-karlsruhe.de/Intranetaccess/buildings/facultyrooms/airquality/data/" CCS811 mySensor(CCS811_ADDR);
+String macAdress = "aa-bb-cc-dd-ee-ff";
+String apiAdress = "https://www.iwi.hs-karlsruhe.de/Intranetaccess/buildings/facultyrooms/airquality/data/";
+CCS811 mySensor(CCS811_ADDR);
 int period = 60000;
 unsigned long time_now = 0;
 std::queue<String> myqueue;
@@ -228,10 +229,10 @@ bool sendActData(String jsonString)
 {
   Serial.println("Try to send: " + jsonString);
 
-  apiAdress.concat(macAddress);
-  http.begin(client, apiAdress);
+  apiAdress.concat(macAdress);
+  http.begin(apiAdress);
   http.addHeader("Content-Type", "application/json");
-  http.sendBasicAuth(authUser, authPwd);
+  http.setAuthorization(authUser, authPwd);
 
   int httpResponseCode = http.POST(jsonString);
 
