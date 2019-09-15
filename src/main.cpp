@@ -11,8 +11,8 @@
 #define CCS811_ADDR 0x5B //Default I2C Address
 //#define CCS811_ADDR 0x5A //Alternate I2C Address
 
-const char *networkName = "Nest";
-const char *networkPswd = "25020792518144796007";
+const char *networkName = "test";
+const char *networkPswd = "testtesttesttestTest123!_*testtest123";
 const char *authUser = "airquality";
 const char *authPwd = "4378jghfj$h#zutfgh3x(ghj)555-_ccc";
 String API_LINK = "https://www.iwi.hs-karlsruhe.de/Intranetaccess/buildings/facultyrooms/airquality/data/"; 
